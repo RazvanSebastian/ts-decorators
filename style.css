@@ -1,0 +1,12 @@
+h1,
+h2 {
+  font-family: Lato;
+}
+
+a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: none;
+}

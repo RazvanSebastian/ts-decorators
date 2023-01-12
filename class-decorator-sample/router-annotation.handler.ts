@@ -1,8 +1,6 @@
 import { getRegisteredRouterPages } from './router-annotation';
 import { RouterPage } from './router-pages';
 
-const appDiv: HTMLElement = document.getElementById('app');
-
 const getRouterPageByRouterLinkPath = (event: any): RouterPage => {
   const registeredRouterPages = getRegisteredRouterPages();
   const routerLinkPath = (event.target as HTMLElement).getAttribute(
@@ -13,7 +11,7 @@ const getRouterPageByRouterLinkPath = (event: any): RouterPage => {
 };
 
 const renderRouterPageContent = (routerPage: RouterPage): void => {
-  appDiv.innerHTML = routerPage.render();
+  document.getElementById('app').innerHTML = routerPage.render();
 };
 
 const handleClickRouterLink = (linkElement: Element) => {

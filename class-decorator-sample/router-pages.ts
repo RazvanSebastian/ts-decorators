@@ -1,3 +1,4 @@
+import { Audit } from './audit-annotation';
 import { Router } from './router-annotation';
 
 export interface RouterPage {

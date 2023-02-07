@@ -1,6 +1,16 @@
+import { DummyAuditClass } from './audit-annotation';
 import { handleRouting } from './router-annotation.handler';
 import './router-pages';
 
+// Audit decorator
+console.log(
+  '===============Audit class decorator================================='
+);
+const audit1 = new DummyAuditClass();
+console.log(Object.getOwnPropertyDescriptor(audit1, 'createdAt'));
+console.log((audit1 as any).getCreatedAt());
+
+// Router class decorator
 const initializeContent = () => {
   const content = `
     <nav>

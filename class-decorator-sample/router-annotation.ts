@@ -1,4 +1,7 @@
 import { RouterPage } from './router-pages';
+console.log(
+  '================Router class decorator==============================='
+);
 
 const registeredRouterPages = new Map<string, RouterPage>();
 

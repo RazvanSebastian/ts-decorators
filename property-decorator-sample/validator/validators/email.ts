@@ -12,14 +12,14 @@ export class EmailValidator implements IValidator {
   validate(target: Object, propertyKey: string): string {
     const value = target[propertyKey];
     if (
-      target[propertyKey] instanceof String &&
+      typeof target[propertyKey] === 'string' &&
       this._pattern.test(target[propertyKey])
     ) {
       return null;
     } else {
       return (
         this._message ||
-        `Value ${value} from property ${propertyKey} is not a valid email`
+        `Value ${value || ''} from property ${propertyKey} is not a valid email`
       );
     }
   }

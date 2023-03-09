@@ -11,12 +11,19 @@ export class MaxLengthValidator implements IValidator {
 
   validate(target: Object, propertyKey: string): string {
     const value = target[propertyKey];
-    if (value instanceof String && value.length <= this._maxLength) {
+    if (
+      typeof target[propertyKey] === 'string' &&
+      value.length <= this._maxLength
+    ) {
       return null;
     } else {
       return (
         this._message ||
-        `Value ${value} from property ${propertyKey} should has max length of ${this._maxLength}`
+        `Value ${
+          value || ''
+        } from property ${propertyKey} should has max length of ${
+          this._maxLength
+        }`
       );
     }
   }

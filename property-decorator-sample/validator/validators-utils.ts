@@ -12,14 +12,13 @@ export const validate = (target: Object): Map<string, string[]> => {
     return null;
   }
 
-  const targetEvaluation = new Map(
-    Object.keys(propertiesValidators).map((propertyKey: string) => {
-      const propertyEvaluation = propertiesValidators
-        .get(propertyKey)
-        .map((validator) => validator.validate(target, propertyKey));
-      return [propertyKey, propertyEvaluation];
-    })
-  );
+  const targetEvaluation = new Map<string, string[]>();
+  for (let [property, validators] of propertiesValidators) {
+    const propertyEvaluation = validators
+      .map((validator) => validator.validate(target, property))
+      .filter((error) => !!error);
+    targetEvaluation.set(property, propertyEvaluation);
+  }
 
   return targetEvaluation;
 };
@@ -44,5 +43,9 @@ export const addValidatorToMetadata = (
     targetValidators.set(propertyKey, [validator]);
   }
 
-  Reflect.metadata(PROPERTY_VALIDATORS_METADATA_KEY, targetValidators);
+  Reflect.defineMetadata(
+    PROPERTY_VALIDATORS_METADATA_KEY,
+    targetValidators,
+    target
+  );
 };

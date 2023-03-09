@@ -6,4 +6,4 @@ import 'reflect-metadata';
 // import './class-decorator-sample';
 
 // Property decorator
-// import './property-decorator-sample/sample';
+import './property-decorator-sample/validator';

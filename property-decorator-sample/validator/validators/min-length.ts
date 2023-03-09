@@ -11,12 +11,19 @@ export class MinLengthValidator implements IValidator {
 
   validate(target: Object, propertyKey: string): string {
     const value = target[propertyKey];
-    if (value instanceof String && value.length >= this._minLength) {
+    if (
+      typeof target[propertyKey] === 'string' &&
+      value.length >= this._minLength
+    ) {
       return null;
     } else {
       return (
         this._message ||
-        `Value ${value} from property ${propertyKey} should have min length of ${this._minLength}`
+        `Value ${
+          value || ''
+        } from property ${propertyKey} should have min length of ${
+          this._minLength
+        }`
       );
     }
   }

@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
 h1,
 h2 {
   font-family: Lato;
@@ -9,4 +11,8 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+
+.error {
+  color: red;
 }

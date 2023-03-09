@@ -21,7 +21,7 @@ export class MaxLengthValidator implements IValidator {
         this._message ||
         `Value ${
           value || ''
-        } from property ${propertyKey} should has max length of ${
+        } from property ${propertyKey} should have max length of ${
           this._maxLength
         }`
       );

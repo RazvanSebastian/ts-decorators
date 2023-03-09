@@ -1,29 +1,22 @@
 import { IValidator } from './base';
 
 export class MinLengthValidator implements IValidator {
-  private _minLength = 3;
-  private _message = null;
+  private readonly defaultMinLength = 3;
 
-  constructor(minLength: number, message: string) {
-    this._minLength = minLength > 0 ? minLength : this._minLength;
-    this._message = message;
-  }
+  constructor(private minLength: number, private message: string) {}
 
   validate(target: Object, propertyKey: string): string {
     const value = target[propertyKey];
+    const conditionalValue = this.minLength || this.defaultMinLength;
     if (
       typeof target[propertyKey] === 'string' &&
-      value.length >= this._minLength
+      value.length >= conditionalValue
     ) {
       return null;
     } else {
       return (
-        this._message ||
-        `Value ${
-          value || ''
-        } from property ${propertyKey} should have min length of ${
-          this._minLength
-        }`
+        this.message ||
+        `Value from property ${propertyKey} should have min length of ${conditionalValue}`
       );
     }
   }

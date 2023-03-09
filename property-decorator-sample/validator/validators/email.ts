@@ -1,25 +1,21 @@
 import { IValidator } from './base';
 
 export class EmailValidator implements IValidator {
-  private _pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  private _message = null;
+  private readonly defaultPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-  constructor(pattern: RegExp, message: string) {
-    this._pattern = pattern || this._pattern;
-    this._message = message;
-  }
+  constructor(private pattern: RegExp, private message: string) {}
 
   validate(target: Object, propertyKey: string): string {
-    const value = target[propertyKey];
+    const conditionalPattern = this.pattern || this.defaultPattern;
     if (
       typeof target[propertyKey] === 'string' &&
-      this._pattern.test(target[propertyKey])
+      conditionalPattern.test(target[propertyKey])
     ) {
       return null;
     } else {
       return (
-        this._message ||
-        `Value ${value || ''} from property ${propertyKey} is not a valid email`
+        this.message ||
+        `Value from property ${propertyKey} is not a valid email`
       );
     }
   }

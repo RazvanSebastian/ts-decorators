@@ -1,29 +1,22 @@
 import { IValidator } from './base';
 
 export class MaxLengthValidator implements IValidator {
-  private _maxLength = 10;
-  private _message = null;
+  private readonly defaultMaxLength = 10;
 
-  constructor(maxLength: number, message: string) {
-    this._maxLength = maxLength > 0 ? maxLength : this._maxLength;
-    this._message = message;
-  }
+  constructor(private maxLength: number, private message: string) {}
 
   validate(target: Object, propertyKey: string): string {
     const value = target[propertyKey];
+    const conditionValue = this.maxLength || this.defaultMaxLength;
     if (
       typeof target[propertyKey] === 'string' &&
-      value.length <= this._maxLength
+      value.length <= conditionValue
     ) {
       return null;
     } else {
       return (
-        this._message ||
-        `Value ${
-          value || ''
-        } from property ${propertyKey} should have max length of ${
-          this._maxLength
-        }`
+        this.message ||
+        `Value from property ${propertyKey} should have max length of ${conditionValue}`
       );
     }
   }

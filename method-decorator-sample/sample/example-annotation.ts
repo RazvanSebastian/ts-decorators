@@ -12,6 +12,7 @@ export function MockMethod(mockValue: any): MethodDecorator {
       function: descriptor.value,
       funcText: descriptor.value.toString(),
     });
+
     // Mock the function
     descriptor.value = (...args: any) => {
       console.log(

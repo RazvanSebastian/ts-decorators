@@ -9,4 +9,5 @@ import 'reflect-metadata';
 // import './property-decorator-sample/validator';
 
 // Method decorator
-import './method-decorator-sample/sample';
+// import './method-decorator-sample/sample';
+import './method-decorator-sample/cache';

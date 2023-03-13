@@ -1,20 +1,13 @@
+import { registerNewPage } from './router-annotation.registry';
 import { RouterPage } from './router-pages';
-console.log(
-  '================Router class decorator==============================='
-);
-
-const registeredRouterPages = new Map<string, RouterPage>();
-
-export const getRegisteredRouterPages = () => {
-  return registeredRouterPages;
-};
 
 export function Router(path: string): ClassDecorator {
-  console.log('Decorator -> Router');
   return (target: any) => {
-    console.log('Decorator -> Router -> ClassDecorator');
+    console.log(
+      `Initialized router with { 'path': '${path}', 'target': '${target.name}'}`
+    );
     const newInstance = new target() as RouterPage;
     newInstance['path'] = path;
-    registeredRouterPages.set(path, newInstance);
+    registerNewPage(path, newInstance);
   };
 }

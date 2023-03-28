@@ -1,5 +1,3 @@
-import { Obj } from '@popperjs/core';
-
 const CACHE_METADATA_KEY = Symbol('cache');
 
 export function Cacheable(): MethodDecorator {

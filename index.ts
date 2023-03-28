@@ -7,7 +7,7 @@ import 'reflect-metadata';
 
 // Property decorator
 // import './property-decorator-sample/validator';
-import './property-decorator-sample/sample';
+// import './property-decorator-sample/sample';
 
 // Method decorator
 // import './method-decorator-sample/sample';

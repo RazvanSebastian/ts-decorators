@@ -1,6 +1,6 @@
-// Audit to class decorator
-export function Audit<T extends { new (...args: any[]): {} }>(target: T) {
-  return class extends target {
+// Audit to class decorator (override the constructor)
+export function Audit<T extends { new (...args: any[]): {} }>(constructor: T) {
+  return class extends constructor {
     private createdAt = new Date().toLocaleString('en-US');
     getCreatedAt() {
       return this.createdAt;

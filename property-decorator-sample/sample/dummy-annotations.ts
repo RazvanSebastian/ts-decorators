@@ -4,19 +4,24 @@ export function addMetadata(
   metadataKey: string,
   metadataValue: any
 ): PropertyDecorator {
-  return function (target: Object, propertyKey: string | symbol): void {
+  console.log(
+    `#1 Expression @addMetadata(${metadataKey}, ${metadataValue}}) called`
+  );
+  return function (constructor: Function, propertyKey: string | symbol): void {
     console.log(
-      `Add on property = ${propertyKey as string} metadata key = ${metadataKey}`
+      `#2 PropertyDecorator called for @addMetadata(${metadataKey}, ${metadataValue})`
     );
+    console.log(`#3 PropertyKey = ${propertyKey as string}`);
 
     let allTargetMetadata =
-      Reflect.getMetadata(PROPERTY_METADATA_KEY, target) || {};
+      Reflect.getMetadata(PROPERTY_METADATA_KEY, constructor) || {};
 
-    console.log('All metadata for target = ', allTargetMetadata);
+    console.log(`#4 All metadata for target = `, allTargetMetadata);
 
     let metadataOnProperty = allTargetMetadata?.[propertyKey];
     console.log(
-      `Metadata on property ${propertyKey as string} = ${metadataOnProperty}`
+      `#5 Metadata on property ${propertyKey as string} =`,
+      metadataOnProperty
     );
 
     if (metadataOnProperty) {
@@ -34,6 +39,10 @@ export function addMetadata(
         [propertyKey]: { ...metadataOnProperty, [metadataKey]: metadataValue },
       };
     }
-    Reflect.defineMetadata(PROPERTY_METADATA_KEY, allTargetMetadata, target);
+    Reflect.defineMetadata(
+      PROPERTY_METADATA_KEY,
+      allTargetMetadata,
+      constructor
+    );
   };
 }

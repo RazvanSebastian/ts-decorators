@@ -13,36 +13,23 @@ export function addMetadata(
     );
     console.log(`#3 PropertyKey = ${propertyKey as string}`);
 
-    let allTargetMetadata =
-      Reflect.getMetadata(PROPERTY_METADATA_KEY, constructor) || {};
+    let metadataOnProperty =
+      Reflect.getMetadata(PROPERTY_METADATA_KEY, constructor, propertyKey) ||
+      {};
 
-    console.log(`#4 All metadata for target = `, allTargetMetadata);
-
-    let metadataOnProperty = allTargetMetadata?.[propertyKey];
-    console.log(
-      `#5 Metadata on property ${propertyKey as string} =`,
-      metadataOnProperty
-    );
+    console.log(`#4 Property metadata = `, metadataOnProperty);
 
     if (metadataOnProperty) {
       metadataOnProperty = {
         ...metadataOnProperty,
         [metadataKey]: metadataValue,
       };
-      allTargetMetadata = {
-        ...allTargetMetadata,
-        [propertyKey]: metadataOnProperty,
-      };
-    } else {
-      allTargetMetadata = {
-        ...allTargetMetadata,
-        [propertyKey]: { ...metadataOnProperty, [metadataKey]: metadataValue },
-      };
     }
     Reflect.defineMetadata(
       PROPERTY_METADATA_KEY,
-      allTargetMetadata,
-      constructor
+      metadataOnProperty,
+      constructor,
+      propertyKey
     );
   };
 }

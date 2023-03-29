@@ -12,3 +12,6 @@ import 'reflect-metadata';
 // Method decorator
 // import './method-decorator-sample/sample';
 // import './method-decorator-sample/cache';
+
+// Reflect API tests
+import './reflection-sample';
